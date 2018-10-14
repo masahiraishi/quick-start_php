@@ -54,5 +54,25 @@ Class Session
         return array_get($this->bag[$getAppDataKey()],$key,$default);
     }
 
+    public function set($key,$value)
+    {
+        return $this->bag[$this->getAppDataKey()][$key] =$value;
+    }
 
+    public function unset($key)
+    {
+        unset($this->bag[$this->getAppDataKey()][$key]);
+    }
+
+    public function unsetAll()
+    {
+        $this->bag[$this->getAppDataKey()] = [];
+    }
+
+    public function flash($key, $default)
+    {
+        $value = $this->get($key, $default);
+        $this->unset($key);
+        return $value;
+    }
 }
