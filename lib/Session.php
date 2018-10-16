@@ -27,7 +27,7 @@ Class Session
 
     public function getCsrfTokenKey()
     {
-        return 'cerf_token';
+        return 'csrf_token';
     }
 
 

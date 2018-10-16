@@ -29,7 +29,7 @@ $errors  = $session->flash('errors',[]);
                     </div>
                 </div>
             </nav>
-                <!--@yield('content-->
+                <!--@yield('content')-->
             <div class="container">
                 <div class="col-sm-offset-2 col-sm-8">
                     <div class="panel panel-default">
@@ -58,7 +58,7 @@ $errors  = $session->flash('errors',[]);
                             <!-- {{csrf_field}}-->
                             <?php csrf_field($session); ?>
                             <!-- Task Name-->
-                            <div class="form-froup">
+                            <div class="form-group">
                                 <label for="task-name" class="col-sm-3 control-label">Task</label>
                                 <div class="col-sm-6">
                                     <input type="text" name="name" id="task-name" class="form-control">
@@ -76,36 +76,41 @@ $errors  = $session->flash('errors',[]);
                         </form>
                     </div>
                 </div>
-<!--                TODO:Current Tasks-->
+                <!--TODO:Current Tasks-->
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        <table class="table table-striped task-tanble">
+                        <table class="table table-striped task-table">
                             <thead>
                                 <th>Task</th>
                                 <th>&nbsp;</th>
                             </thead>
                             <tbody>
-                            <td class="table-text"><div>
                             <?php foreach($tasks as $task): ?>
-                                <?php echo h($task['name']); ?>
-                            </div></td>
-<!--                            Delete Button-->
-                            <td>
-                            <form action="/task-delete.php?id=<?php echo h($task['id']); ?>" method="POST">
-<!--                                {{csrf_field()}}-->
-                                <?php csrf_field($session); ?>
-                            </div>
                                 <tr>
-                                    <td class="table-text">
-
+                                    <td class="table-text"><div>
+                                        <?php echo h($task['name']); ?>
+                                    </div></td>
+                                    <!--Delete Button-->
+                                    <td>
+                                        <form action="/task-delete.php?id=<?php echo h($task['id']); ?>" method="POST">
+                                            <!--{{csrf_field()}}-->
+                                            <?php csrf_field($session); ?>
+                                            <!--{{method_field('DELETE}}-->
+                                            <button type="submit" class="btn btn-danger pull-right">
+                                                <i class="fa fa-trash"></i>Delete
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
+                            <?php endforeach; ?>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-
-
+<!--JavaScripts-->
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        </body>
+</html>
 
 
