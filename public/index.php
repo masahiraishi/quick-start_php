@@ -23,7 +23,7 @@ $errors  = $session->flash('errors',[]);
                 <div class="container">
                     <!-- navbar -->
                     <div class="navbar-header">
-                        <a href="navbar-brand" href="/">
+                        <a class="navbar-brand" href="/">
                             Task List
                         </a>
                     </div>
@@ -33,49 +33,50 @@ $errors  = $session->flash('errors',[]);
             <div class="container">
                 <div class="col-sm-offset-2 col-sm-8">
                     <div class="panel panel-default">
-                        New Task
-                    </div>
-
-                    <div class="panel-body">
-<!--                        Display Validation Errors-->
-<!--                        @include('common.errors')-->
-<!--                        Form Error List-->
-                        <?php if($errors): ?>
-                        <div class="alert alert-danger">
-                            <strong>エラーが有りますよ</strong>
-                            <br><br>
-                            <ul>
-                                <?php foreach ($errors as $error): ?>
-                                <li><?php echo h($error); ?></li>
-                                <?php endforeach; ?>
-                            </ul>
+                        <div class="panel-heading">
+                            New Task
                         </div>
-                        <?php endif; ?>
 
-
-                        <!-- New Task Form-->
-                        <form action="/task-store.php" method="POST" class=""form-horizontal>
-                            <!-- {{csrf_field}}-->
-                            <?php csrf_field($session); ?>
-                            <!-- Task Name-->
-                            <div class="form-group">
-                                <label for="task-name" class="col-sm-3 control-label">Task</label>
-                                <div class="col-sm-6">
-                                    <input type="text" name="name" id="task-name" class="form-control">
-                                </div>
+                        <div class="panel-body">
+    <!--                        Display Validation Errors-->
+    <!--                        @include('common.errors')-->
+    <!--                        Form Error List-->
+                            <?php if($errors): ?>
+                            <div class="alert alert-danger">
+                                <strong>エラーが有りますよ</strong>
+                                <br><br>
+                                <ul>
+                                    <?php foreach ($errors as $error): ?>
+                                    <li><?php echo h($error); ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
                             </div>
+                            <?php endif; ?>
 
-                            <!-- Add Task Button-->
-                            <div class="form-group">
-                                <div class="col-sm-offset-3 colsm-6">
-                                    <button type="submit" class="btn btn-default">
-                                        <i class="fa fa-plus"></i>Add Task
-                                    </button>
+
+                            <!-- New Task Form-->
+                            <form action="task-store.php" method="POST" class="form-horizontal">
+                                <!-- {{csrf_field}}-->
+                                <?php csrf_field($session); ?>
+                                <!-- Task Name-->
+                                <div class="form-group">
+                                    <label for="task-name" class="col-sm-3 control-label">Task</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" name="name" id="task-name" class="form-control">
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+
+                                <!-- Add Task Button-->
+                                <div class="form-group">
+                                    <div class="col-sm-offset-3 col-sm-6">
+                                        <button type="submit" class="btn btn-default">
+                                            <i class="fa fa-btn fa-plus"></i>Add Task
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
                     </div>
-                </div>
                 <!--TODO:Current Tasks-->
                 <div class="panel panel-default">
                     <div class="panel-heading">

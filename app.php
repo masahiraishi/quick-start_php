@@ -5,10 +5,11 @@ function join_paths(array $paths)
     return implode(DIRECTORY_SEPARATOR,$paths);
 }
 define('APP_ROOT',dirname(__FILE__));
-define('LIB_ROOT',join_paths([APP_ROOT,'models']));
-define('MODELS_ROOT',join_paths([LIB_ROOT,'functions.php']));
+define('LIB_ROOT',join_paths([APP_ROOT,'lib']));
+define('MODELS_ROOT',join_paths([APP_ROOT,'models']));
+
 require_once join_paths([APP_ROOT,'config','env.php']);
-require_once join_paths([LIB_ROOT,'function.php']);
+require_once join_paths([LIB_ROOT,'functions.php']);
 // DB
 function db()
 {
@@ -43,8 +44,8 @@ function session($namespace= 'app')
 
 function csrf_field(Session $session)
 {
-    $name = $session->getRequestCsrfTokenKey();
+    $name  = $session->getRequestCsrfTokenKey();
     $token = $session->getCsrfToken();
-    echo '<input type="hidden" name= "'.$name. "' value='".h($token).'">';
+    echo '<input type="hidden" name= "'.$name. '" value="'.h($token).'">';
 }
 

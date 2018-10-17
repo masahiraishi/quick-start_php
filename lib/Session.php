@@ -40,8 +40,13 @@ Class Session
     {
         return sha1(unipid(rand(),true));
     }
+    public function getCsrfToken()
+    {
+        return array_get($this->bag,$this->getCsrfTokenKey());
+    }
 
-    public function verfyCsrfToken(){
+    public function verifyCsrfToken()
+    {
         $request_token =request_get($this->getRequestCsrfTokenKey());
         $valid_token =$this->getCsrfToken();
 
@@ -51,7 +56,7 @@ Class Session
 
     public function get($key,$default = null)
     {
-        return array_get($this->bag[$getAppDataKey()],$key,$default);
+        return array_get($this->bag[$this->getAppDataKey()],$key,$default);
     }
 
     public function set($key,$value)

@@ -39,14 +39,14 @@ class Validate
 //
     public static function validateNotNumberOnly($value)
     {
-        return !preg_match('/^[0-90-9]+$',strval($value));
+        return !preg_match('/^[0-9 ０−９]+$/',strval($value));
     }
 
 //  文字数の制限をする
     public static function validateMax($value,$params)
     {
         if(!isset($params[0]) || !intval($params[0])){
-            throw new Exception('Validateのrule max:255のように文字数をしていてください');
+            throw new Exception('Validateのrule max:255のように文字数を指定してください');
         }
 
         $max_length =$params[0];

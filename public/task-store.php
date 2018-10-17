@@ -4,7 +4,8 @@ require_once '../app.php';
 require_once join_paths([MODELS_ROOT,'Task.php']);
 require_once join_paths([LIB_ROOT,'Validate.php']);
 $session = session('tasks');
-if(!$session->verifuCsrfToken()){
+
+if(!$session->verifyCsrfToken()){
     $session->set('errors',['セッションが切れました。ページをリロードしてください!']);
     redirect('/');
 }
@@ -26,9 +27,10 @@ $errors = Validate::test(
         ]
     ]
 );
+
 if($errors){
     $session->set('errors',$errors);
 }else{
     $id = Task::create($params);
 }
-redirect('/');
+redirect('index.php');
