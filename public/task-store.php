@@ -33,4 +33,4 @@ if($errors){
 }else{
     $id = Task::create($params);
 }
-redirect('index.php');
+redirect('/');
