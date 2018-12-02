@@ -30,20 +30,28 @@
 
             $cols =array_keys($params);
             $values =array_values($params);
-
+var_dump($values);
             $sql = implode(' ',[
                 'INSERT INTO',
                 quote_sql(static::$table),
+                '('.implode(', ', array_map('quote_sql', $cols)).')',
+                'VALUES',
                 '(' .implode(', ',array_pad([],count($values),'?')).')',
             ]);
-
                 $dbh =db()->prepare($sql);
 
+//            echo  $dbh;
+            $dbh->execute($values);
+//var_dump($dbh);
+//exit;
                 if(!$dbh->execute($values)){
+                echo 'aaa';
+                exit;
                     return false;
                 }
                 return db()->lastInsertId('id');
         }
+
         public static function delete($id)
         {
             $sql =implode(' ',[
@@ -51,6 +59,7 @@
                 quote_sql(static::$table),
                 'WHERE `id` = ?',
                 ]);
+
             $values =[$id];
 
             $dbh =db()->prepare($sql);

@@ -1,12 +1,12 @@
 <?php
 
 require_once '../app.php';
-require_once join_paths([MODELS_ROOT,'Task.php']);
-require_once join_paths([LIB_ROOT,'Validate.php']);
-$session = session('tasks');
+require_once join_paths([MODELS_ROOT, 'Task.php']);
+require_once join_paths([LIB_ROOT, 'Validate.php']);
 
-if(!$session->verifyCsrfToken()){
-    $session->set('errors',['セッションが切れました。ページをリロードしてください!']);
+$session = session('tasks');
+if (!$session->verifyCsrfToken()) {
+    $session->set('errors', ['セッションが切れました。ページをリロードしてください！']);
     redirect('/');
 }
 
@@ -15,22 +15,26 @@ $params = [
 ];
 
 $errors = Validate::test(
-    $rules =[
+    $rules = [
         'name' => 'required|not_number_only|max:'.($name_max_length = 255),
     ],
     $params,
-    $message = [
+    $messages = [
         'name' => [
-            'required'          =>'タスク名を入力してください!',
-            'not_number_only'   =>'数字だけのタスク名は登録出来ません',
-            'max'               => 'タスク名は'.$name_max_length.'文字以内で入力してください',
+            'required'        => 'タスク名を入力してください！',
+            'not_number_only' => '数字だけのタスク名は登録できません',
+            'max'             => 'タスク名は'.$name_max_length.'文字以内で入力してください',
         ]
     ]
 );
 
-if($errors){
-    $session->set('errors',$errors);
-}else{
+
+if ($errors) {
+    $session->set('errors', $errors);
+} else {
     $id = Task::create($params);
+//    echo'a';
+//exit;
 }
+
 redirect('/');

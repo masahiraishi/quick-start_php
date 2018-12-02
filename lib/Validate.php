@@ -18,7 +18,7 @@ class Validate
                 $rule_parts  = explode(':',$rule);
                 $rule_name   = array_shift($rule_parts);
                 $rule_params = $rule_parts;
-                $method      = ''.camelize('',$rule_name);
+                $method      = 'validate'.camelize(''.$rule_name);
                 if(!static::$method($value,$rule_params)){
                     $error_messages[$rule_name] = array_get($message_templates,$rule_name,$rule_name.'のエラーが発生しました');
                 }

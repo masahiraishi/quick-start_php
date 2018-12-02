@@ -16,7 +16,7 @@ function dd()
 
 function array_get($array,$key,$default=null)
 {
-    if(is_array($array) &&isset($array[$key])){
+    if(is_array($array) && isset($array[$key])){
         return $array[$key];
     }
     return $default;
