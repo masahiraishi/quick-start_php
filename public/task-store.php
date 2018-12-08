@@ -33,8 +33,6 @@ if ($errors) {
     $session->set('errors', $errors);
 } else {
     $id = Task::create($params);
-//    echo'a';
-//exit;
 }
 
 redirect('/');

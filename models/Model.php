@@ -30,7 +30,7 @@
 
             $cols =array_keys($params);
             $values =array_values($params);
-var_dump($values);
+
             $sql = implode(' ',[
                 'INSERT INTO',
                 quote_sql(static::$table),
@@ -40,13 +40,7 @@ var_dump($values);
             ]);
                 $dbh =db()->prepare($sql);
 
-//            echo  $dbh;
-            $dbh->execute($values);
-//var_dump($dbh);
-//exit;
                 if(!$dbh->execute($values)){
-                echo 'aaa';
-                exit;
                     return false;
                 }
                 return db()->lastInsertId('id');

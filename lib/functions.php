@@ -51,5 +51,5 @@ function camelize(string $s)
 
 function redirect($url){
     header ('Location:'.$url);
-    exit;
+    exit();
 }
